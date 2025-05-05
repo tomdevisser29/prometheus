@@ -1,4 +1,3 @@
-import SignIn from "@/components/sign-in";
 import SignOut from "@/components/sign-out";
 import { auth } from "@/auth";
 
@@ -9,7 +8,7 @@ export default async function Home() {
     <>
       <header className="flex justify-between p-8">
         <h1>Prometheus</h1>
-        {!session ? <SignIn /> : <SignOut />}
+        {!session ? <a href="/sign-in">Sign in</a> : <SignOut />}
       </header>
       <main className="p-8">
         <p>Your new quality assurance tool</p>
