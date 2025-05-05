@@ -16,15 +16,23 @@ export async function GET(
   });
 
   if (!provider) {
-    return NextResponse.json({
-      status: 404,
-      data: null,
-      message: `No provider found with ID ${id}.`,
-    });
+    return NextResponse.json(
+      {
+        data: null,
+        message: `No provider found with ID ${id}.`,
+      },
+      {
+        status: 404,
+      }
+    );
   }
 
-  return NextResponse.json({
-    status: 200,
-    data: provider,
-  });
+  return NextResponse.json(
+    {
+      data: provider,
+    },
+    {
+      status: 200,
+    }
+  );
 }

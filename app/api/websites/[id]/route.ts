@@ -16,15 +16,23 @@ export async function GET(
   });
 
   if (!website) {
-    return NextResponse.json({
-      status: 404,
-      data: null,
-      message: `No website found with ID ${id}.`,
-    });
+    return NextResponse.json(
+      {
+        data: null,
+        message: `No website found with ID ${id}.`,
+      },
+      {
+        status: 404,
+      }
+    );
   }
 
-  return NextResponse.json({
-    status: 200,
-    data: website,
-  });
+  return NextResponse.json(
+    {
+      data: website,
+    },
+    {
+      status: 200,
+    }
+  );
 }

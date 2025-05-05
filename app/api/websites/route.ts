@@ -15,17 +15,25 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
 
   if (!body.url) {
-    return NextResponse.json({
-      status: 400,
-      message: "Missing field 'url'.",
-    });
+    return NextResponse.json(
+      {
+        message: "Missing field 'url'.",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   if (!body.providerId) {
-    return NextResponse.json({
-      status: 400,
-      message: "Missing field 'providerId'.",
-    });
+    return NextResponse.json(
+      {
+        message: "Missing field 'providerId'.",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   const provider = await prisma.provider.findUnique({
@@ -35,10 +43,14 @@ export async function POST(request: NextRequest) {
   });
 
   if (!provider) {
-    return NextResponse.json({
-      status: 400,
-      message: `No provider found that matches given 'providerId' ${body.providerId}.`,
-    });
+    return NextResponse.json(
+      {
+        message: `No provider found that matches given 'providerId' ${body.providerId}.`,
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   const websiteData = {
@@ -48,8 +60,12 @@ export async function POST(request: NextRequest) {
 
   const website = await prisma.website.create({ data: websiteData });
 
-  return NextResponse.json({
-    status: 201,
-    message: `Created website with ID ${website.id}`,
-  });
+  return NextResponse.json(
+    {
+      message: `Created website with ID ${website.id}`,
+    },
+    {
+      status: 201,
+    }
+  );
 }
