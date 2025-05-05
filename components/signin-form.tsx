@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import SignInButton from "./sign-in-button";
+import SignInButton from "./signin-button";
 import Image from "next/image";
 import { signIn } from "@/auth";
 

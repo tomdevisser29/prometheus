@@ -53,12 +53,12 @@ const data = {
     },
     {
       title: "Automation",
-      url: "#",
+      url: "/dashboard/automation",
       icon: Bot,
     },
     {
       title: "Analytics",
-      url: "#",
+      url: "/dashboard/analytics",
       icon: ChartColumn,
     },
   ],
