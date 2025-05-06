@@ -7,11 +7,12 @@ import {
   Compass,
   LayoutDashboard,
   LifeBuoy,
+  ScanText,
   Send,
   ShieldCheck,
 } from "lucide-react";
 
-import { NavMain } from "@/components/nav-main";
+import { NavGroup } from "@/components/nav-group";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -74,11 +75,18 @@ const data = {
       icon: Send,
     },
   ],
+  tools: [
+    {
+      title: "Quickscan",
+      url: "/dashboard/quickscan",
+      icon: ScanText,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" collapsible="icon" {...props}>
+    <Sidebar variant="sidebar" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -97,7 +105,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavGroup items={data.navMain} heading="General" />
+        <NavGroup items={data.tools} heading="Tools" />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
