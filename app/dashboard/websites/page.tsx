@@ -1,16 +1,57 @@
 import DashboardHeader from "@/components/dashboard-header";
 
-export default function Page() {
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+import { Badge } from "@/components/ui/badge";
+
+import { prisma } from "@/lib/prisma";
+
+export default async function Page() {
+  const websites = await prisma.website.findMany({
+    include: {
+      provider: true,
+    },
+  });
+
   return (
     <>
       <DashboardHeader pageTitle="Websites" />
       <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="bg-muted/50 aspect-video rounded-xl" />
-          <div className="bg-muted/50 aspect-video rounded-xl" />
-          <div className="bg-muted/50 aspect-video rounded-xl" />
-        </div>
-        <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+        <main className="min-h-[100vh] flex-1 md:min-h-min">
+          <Table>
+            <TableCaption>A list of your recent automations.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">ID</TableHead>
+                <TableHead>Website</TableHead>
+                <TableHead>Created At</TableHead>
+                <TableHead className="text-right">Provider</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {websites.map((website) => (
+                <TableRow key={website.id}>
+                  <TableCell>{website.id}</TableCell>
+                  <TableCell className="flex gap-3 items-center">
+                    {website.url}
+                  </TableCell>
+                  <TableCell>{website.createdAt.toLocaleString()}</TableCell>
+                  <TableCell className="text-right">
+                    <Badge variant="outline">{website.provider.name}</Badge>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </main>
       </div>
     </>
   );
